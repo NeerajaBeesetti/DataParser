@@ -60,7 +60,6 @@ public class Utils {
             int combinedFips = Integer.parseInt(line[10]); //input is Alaska
             //TODO: fix the indexes
 
-
            ElectionResult result = new ElectionResult(votesDem, votesGop, totalVotes, perDem, perGop, diff, perPointDiff, stateAbbr, countryName, combinedFips);
            results.add(result);
 
