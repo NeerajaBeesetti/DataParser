@@ -1,10 +1,10 @@
 public class ElectionResult {
 
-    private int votesDem, votesGop, totalVotes, diff, combinedFips;
-    private double perDem, perGop, perPointDiff;
+    private int diff, combinedFips;
+    private double votesDem, votesGop, totalVotes, perDem, perGop, perPointDiff;
     private String stateAbbr, countryName;
 
-    public ElectionResult(int votesDem, int votesGop, int totalVotes, double perDem, double perGop, int diff, double perPointDiff,  String stateAbbr, String countryName, int combinedFips) {
+    public ElectionResult(double votesDem, double votesGop, double totalVotes, double perDem, double perGop, int diff, double perPointDiff, String stateAbbr, String countryName, int combinedFips) {
         this.votesDem = votesDem;
         this.votesGop = votesGop;
         this.totalVotes = totalVotes;
@@ -18,30 +18,30 @@ public class ElectionResult {
     }
 
     public void resultToString() {
-        System.out.println(votesDem + ", " + votesGop + ", " + totalVotes+ ", " +perDem+ ", " +perGop+ ", " +diff+ ", " +perPointDiff+ ", " +stateAbbr+ ", " +countryName+ ", " +combinedFips);
+        System.out.println(votesDem + ", " + votesGop + ", " + totalVotes + ", " + perDem + ", " + perGop + ", " + diff + ", " + perPointDiff + ", " + stateAbbr + ", " + countryName + ", " + combinedFips);
     }
 
-    public int getVotesDem() {
+    public double getVotesDem() {
         return votesDem;
     }
 
-    public void setVotesDem(int votesDem) {
+    public void setVotesDem(double votesDem) {
         this.votesDem = votesDem;
     }
 
-    public int getVotesGop() {
+    public double getVotesGop() {
         return votesGop;
     }
 
-    public void setVotesGop(int votesGop) {
+    public void setVotesGop(double votesGop) {
         this.votesGop = votesGop;
     }
 
-    public int getTotalVotes() {
+    public double getTotalVotes() {
         return totalVotes;
     }
 
-    public void setTotalVotes(int totalVotes) {
+    public void setTotalVotes(double totalVotes) {
         this.totalVotes = totalVotes;
     }
 
