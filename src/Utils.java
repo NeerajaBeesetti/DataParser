@@ -19,4 +19,8 @@ public class Utils {
 
         return output.toString();
     }
+
+    public static ArrayList<ElectionResult> parse2016ElectionResults(String data) {
+
+    }
 }
