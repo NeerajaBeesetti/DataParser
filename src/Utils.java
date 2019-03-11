@@ -49,6 +49,29 @@ public class Utils {
         return results;
     }
 
+    public static ArrayList<Education2016> parse2016Education(String data) {
+        ArrayList<Education2016> results = new ArrayList<>();
+        String[] rows = data.split("\n");
+
+        for (int i = 5; i < rows.length; i++) {
+            rows[i] = fixRow(rows[i]);
+            String[] line = rows[i].split(",");
+
+            double noHighSchool = Double.parseDouble(line[43]);
+            double onlyHighSchool = Double.parseDouble(line[44]);
+            double someCollege = Double.parseDouble(line[45]);
+            double bachelorsOrMore = Double.parseDouble(line[46]);
+
+            //TODO: fix error
+            //indexOutOfBounds error
+            //most likely due to empty indexes (looks like: ,,,,,,)
+
+            Education2016 result = new Education2016(noHighSchool, onlyHighSchool, someCollege, bachelorsOrMore);
+            results.add(result);
+        }
+        return results;
+    }
+
 
     private static String fixRow(String row) {
 
