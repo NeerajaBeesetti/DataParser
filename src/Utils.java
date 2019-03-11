@@ -72,8 +72,32 @@ public class Utils {
         return results;
     }
 
+    public static ArrayList<Employment2016> parse2016Unemployment(String data) {
+        ArrayList<Employment2016> results = new ArrayList<>();
+        String[] rows = data.split("\n");
+
+        for (int i = 8; i < rows.length; i++) {
+            rows[i] = fixRow(rows[i]);
+            String[] line = rows[i].split(",");
+
+             int totalLaborForce = Integer.parseInt(line[42]);
+             int employedLaborForce = Integer.parseInt(line[43]);
+             int unemployedLaborForce = Integer.parseInt(line[44]);
+             double unemployedPercent = Double.parseDouble(line[45]);
+
+            //TODO: fix error
+            //number format exception error
+            //most likely due to conversion of String to int?
+
+            Employment2016 result = new Employment2016(totalLaborForce, employedLaborForce, unemployedLaborForce, unemployedPercent);
+            results.add(result);
+        }
+        return results;
+
+    }
 
     private static String fixRow(String row) {
+        row = row.replace(" ", "");
 
         while (row.indexOf("\"") != -1) {
             int quoteStartIndex = row.indexOf("\"");
@@ -94,7 +118,14 @@ public class Utils {
 
         }
 
+        while (row.indexOf("$") != -1) {
+            int signIndex = row.indexOf("$");
+            row = row.substring(0, signIndex) + row.substring(signIndex + 1, row.length());
+
+        }
+
         return row;
 
     }
+
 }
