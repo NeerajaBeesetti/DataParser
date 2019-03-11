@@ -27,8 +27,7 @@ public class Utils {
         String[] rows = data.split("\n");
 
         for (int i = 1; i < rows.length; i++) {
-            removeCommasInQuotations(rows, i);
-
+            rows[i] = fixRow(rows[i]);
             String[] line = rows[i].split(",");
 
             double votesDem = Double.parseDouble(line[1]);
@@ -37,7 +36,7 @@ public class Utils {
             double perDem = Double.parseDouble(line[4]);
             double perGop = Double.parseDouble(line[5]);
             int diff = Integer.parseInt(line[6]);
-            double perPointDiff = Double.parseDouble(line[7].substring(0, line[7].length() - 1));
+            double perPointDiff = Double.parseDouble(line[7]);
             String stateAbbr = line[8];
             String countryName = line[9];
             int combinedFips = Integer.parseInt(line[10]);
@@ -50,23 +49,29 @@ public class Utils {
         return results;
     }
 
-    private static void removeCommasInQuotations(String[] rows, int i) {
-        String stringDiff;
-        String diffWComma;
-        String diffWOComma;
-        int stringStartIndex = rows[i].indexOf("\"");
 
-        if (stringStartIndex != -1) {
-            int stringEndIndex = rows[i].indexOf("\"", stringStartIndex + 1);
+    private static String fixRow(String row) {
 
-            rows[i] = rows[i].replace("\"", "");
-            stringDiff = rows[i].substring(stringStartIndex, stringEndIndex - 1);
-            diffWComma = stringDiff;
-            stringDiff = stringDiff.replace(",", "");
-            diffWOComma = stringDiff;
+        while (row.indexOf("\"") != -1) {
+            int quoteStartIndex = row.indexOf("\"");
+            int quoteEndIndex = row.indexOf("\"", quoteStartIndex + 1);
 
-            rows[i] = rows[i].replace(diffWComma, diffWOComma);
+            String wordWQuotes = row.substring(quoteStartIndex, quoteEndIndex + 1);
+
+            String unfixedWord = row.substring(quoteStartIndex + 1, quoteEndIndex);
+            String fixedWord = unfixedWord.replace(",", "");
+
+            row = row.replace(wordWQuotes, fixedWord);
 
         }
+
+        while (row.indexOf("%") != -1) {
+            int signIndex = row.indexOf("%");
+            row = row.substring(0, signIndex) + row.substring(signIndex + 1, row.length());
+
+        }
+
+        return row;
+
     }
 }

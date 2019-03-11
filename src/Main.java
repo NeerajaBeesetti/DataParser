@@ -7,11 +7,21 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        //test of utils
 
-        String data = Utils.readFileAsString("data/2016_Presidential_Results.csv");
+//        String electionData = Utils.readFileAsString("data/2016_Presidential_Results.csv");
+//
+//        ArrayList<ElectionResult> electionResults = Utils.parse2016ElectionResults(electionData);
+//        System.out.println(electionResults);
 
-        ArrayList<ElectionResult> results = Utils.parse2016ElectionResults(data);
-        System.out.println(results);
+        String educationData = Utils.readFileAsString("data/Education.csv");
+
+        ArrayList<Education2016> educationResults = Utils.parse2016Education(educationData);
+        System.out.println(educationResults);
+
+//        String unemploymentData = Utils.readFileAsString("data/Unemployment.csv");
+//
+//        ArrayList<Employment2016> employmentResults = Utils.parse2016Unemployment(unemploymentData);
+//        System.out.println(employmentResults);
+
     }
 }
