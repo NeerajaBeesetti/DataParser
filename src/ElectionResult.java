@@ -2,9 +2,9 @@ public class ElectionResult {
 
     private int diff, combinedFips;
     private double votesDem, votesGop, totalVotes, perDem, perGop, perPointDiff;
-    private String stateAbbr, countryName;
+    private String stateAbbr, countyName;
 
-    public ElectionResult(double votesDem, double votesGop, double totalVotes, double perDem, double perGop, int diff, double perPointDiff, String stateAbbr, String countryName, int combinedFips) {
+    public ElectionResult(double votesDem, double votesGop, double totalVotes, double perDem, double perGop, int diff, double perPointDiff, String stateAbbr, String countyName, int combinedFips) {
         this.votesDem = votesDem;
         this.votesGop = votesGop;
         this.totalVotes = totalVotes;
@@ -14,11 +14,11 @@ public class ElectionResult {
         this.perGop = perGop;
         this.perPointDiff = perPointDiff;
         this.stateAbbr = stateAbbr;
-        this.countryName = countryName;
+        this.countyName = countyName;
     }
 
     public void resultToString() {
-        System.out.println(votesDem + ", " + votesGop + ", " + totalVotes + ", " + perDem + ", " + perGop + ", " + diff + ", " + perPointDiff + ", " + stateAbbr + ", " + countryName + ", " + combinedFips);
+        System.out.println(votesDem + ", " + votesGop + ", " + totalVotes + ", " + perDem + ", " + perGop + ", " + diff + ", " + perPointDiff + ", " + stateAbbr + ", " + countyName + ", " + combinedFips);
     }
 
     public double getVotesDem() {
@@ -93,11 +93,11 @@ public class ElectionResult {
         this.stateAbbr = stateAbbr;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getCountyName() {
+        return countyName;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setCountyName(String countyName) {
+        this.countyName = countyName;
     }
 }

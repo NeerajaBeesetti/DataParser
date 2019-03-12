@@ -38,10 +38,10 @@ public class Utils {
             int diff = Integer.parseInt(line[6]);
             double perPointDiff = Double.parseDouble(line[7]);
             String stateAbbr = line[8];
-            String countryName = line[9];
+            String countyName = line[9];
             int combinedFips = Integer.parseInt(line[10]);
 
-            ElectionResult result = new ElectionResult(votesDem, votesGop, totalVotes, perDem, perGop, diff, perPointDiff, stateAbbr, countryName, combinedFips);
+            ElectionResult result = new ElectionResult(votesDem, votesGop, totalVotes, perDem, perGop, diff, perPointDiff, stateAbbr, countyName, combinedFips);
             result.resultToString();
             results.add(result);
 
@@ -76,18 +76,31 @@ public class Utils {
         ArrayList<Employment2016> results = new ArrayList<>();
         String[] rows = data.split("\n");
 
+
         for (int i = 8; i < rows.length; i++) {
             rows[i] = fixRow(rows[i]);
             String[] line = rows[i].split(",");
 
-             int totalLaborForce = Integer.parseInt(line[42]);
-             int employedLaborForce = Integer.parseInt(line[43]);
-             int unemployedLaborForce = Integer.parseInt(line[44]);
-             double unemployedPercent = Double.parseDouble(line[45]);
+            int totalLaborForce, employedLaborForce, unemployedLaborForce;
+            double unemployedPercent;
+
+
+            if (!isInteger(line[42])) line[42] = "0";
+            if (!isInteger(line[43])) line[43] = "0";
+            if (!isInteger(line[44])) line[44] = "0";
+            if (!isInteger(line[45])) line[45] = "0";
+
+                totalLaborForce = Integer.parseInt(line[42]);
+                 employedLaborForce = Integer.parseInt(line[43]);
+                 unemployedLaborForce = Integer.parseInt(line[44]);
+                 unemployedPercent = Double.parseDouble(line[45]);
+
+
+
 
             //TODO: fix error
             //number format exception error
-            //most likely due to conversion of String to int?
+            //conversion of String to int?
 
             Employment2016 result = new Employment2016(totalLaborForce, employedLaborForce, unemployedLaborForce, unemployedPercent);
             results.add(result);
@@ -95,6 +108,17 @@ public class Utils {
         return results;
 
     }
+
+    public static boolean isInteger(String str) {
+        int n = 0;
+        try {
+            n = Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
 
     private static String fixRow(String row) {
         row = row.replace(" ", "");
