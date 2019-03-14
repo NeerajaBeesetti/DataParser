@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager {
     private List<State> states;
 
-    public DataManager(List<State> states) {
-        this.states = states;
+    public DataManager() {
+        states = new ArrayList<>();
     }
 
     public List<State> getStates() {
