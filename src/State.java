@@ -7,7 +7,7 @@ public class State {
     private List<County> counties;
 
     public State() {
-       counties = new ArrayList<>();
+        counties = new ArrayList<>();
     }
 
     public void addCounty(County county) {
@@ -28,6 +28,14 @@ public class State {
 
     public void setCounties(List<County> counties) {
         this.counties = counties;
+    }
+
+
+    public County getCounty(String countyName, int combinedFips) {
+        for (County c : counties) {
+            if (c.getName().equals(countyName) || c.getFips() == combinedFips) return c;
+        }
+        return null;
     }
 
 

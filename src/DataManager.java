@@ -16,14 +16,14 @@ public class DataManager {
         this.states = states;
     }
 
-    public boolean containsAlreadyExistingState(String stateToCheck) {
+    public State getAlreadyExistingState(String stateToCheck) {
         boolean out = false;
         for (int i = 0; i < states.size(); i++) {
            if (states.get(i).equals(stateToCheck)) {
-               out = true;
+               return states.get(i);
            }
         }
-        return out;
+        return null;
     }
 
     public void add(State s) {

@@ -1,7 +1,7 @@
 public class County {
     private String name;
     private int fips;
-    private Election2016 vote2016;
+    private ElectionResult vote2016;
     private Education2016 educ2016;
     private Employment2016 employ2016;
 
@@ -26,11 +26,11 @@ public class County {
         this.fips = fips;
     }
 
-    public Election2016 getVote2016() {
+    public ElectionResult getVote2016() {
         return vote2016;
     }
 
-    public void setVote2016(Election2016 vote2016) {
+    public void setVote2016(ElectionResult vote2016) {
         this.vote2016 = vote2016;
     }
 

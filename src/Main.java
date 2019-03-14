@@ -9,46 +9,48 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        String electionData = Utils.readFileAsString("data/2016_Presidential_Results.csv");
+        DataManager dataManager = new DataManager();
 
-//        ArrayList<ElectionResult> electionResults = Utils.parse2016ElectionResults(electionData);
+//        String electionData = Utils.readFileAsString("data/2016_Presidential_Results.csv");
+//
+//        ArrayList<ElectionResult> electionResults = Utils.parse2016ElectionResults(electionData, dataManager);
 //        System.out.println(electionResults);
-
-        String educationData = Utils.readFileAsString("data/Education.csv");
-
+//
+//        String educationData = Utils.readFileAsString("data/Education.csv");
+//
 //        ArrayList<Education2016> educationResults = Utils.parse2016Education(educationData);
 //        System.out.println(educationResults);
-
-        String unemploymentData = Utils.readFileAsString("data/Unemployment.csv");
-
+//
+//        String unemploymentData = Utils.readFileAsString("data/Unemployment.csv");
+//
 //        ArrayList<Employment2016> employmentResults = Utils.parse2016Unemployment(unemploymentData);
 //        System.out.println(employmentResults);
+//
 
-
-
-        loadAllData("data/2016_Presidential_Results.csv", "data/Education.csv", "data/Unemployment.csv");
+        loadAllData("data/2016_Presidential_Results.csv", "data/Education.csv", "data/Unemployment.csv", dataManager);
 
 
     }
 
-    private static void loadAllData(String electionFile, String educationFile, String unemploymentFile) {
+    private static void loadAllData(String electionFile, String educationFile, String unemploymentFile, DataManager dataManager) {
         String[] electionRawCleanedLines = Utils.readFileAsCleanedLines(electionFile, 1);
-        String[] educationRawCleanedLines = Utils.readFileAsCleanedLines(educationFile, 5);
-        //System.out.println(Arrays.toString(educationRawCleanedLines));
-
+//        String[] educationRawCleanedLines = Utils.readFileAsCleanedLines(educationFile, 5);
         String[] unemploymentRawCleanedLines = Utils.readFileAsCleanedLines(unemploymentFile, 8);
 
-        DataManager dataManager = new DataManager();
         List<State> states = dataManager.getStates();
-
         Utils.addStateObjs(electionRawCleanedLines, states);
-        //System.out.println(states);
         Utils.addCountyObjs(electionRawCleanedLines, states);
-//        loadEducationDataIntoObjs(educationRawCleanedLines);
 
+//        ArrayList<ElectionResult> electionResults = Utils.parse2016ElectionResults(electionRawCleanedLines, dataManager);
+//        ArrayList<Education2016> educationResults = Utils.parse2016Education(educationRawCleanedLines, dataManager);
+        ArrayList<Employment2016> employmentResults = Utils.parse2016Unemployment(unemploymentRawCleanedLines, dataManager);
+
+        System.out.println(employmentResults);
+
+
+        //adding education and employment data done inside parsing methods
 
     }
-
 
 
 }
