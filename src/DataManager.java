@@ -17,11 +17,10 @@ public class DataManager {
     }
 
     public State getAlreadyExistingState(String stateToCheck) {
-        boolean out = false;
         for (int i = 0; i < states.size(); i++) {
-           if (states.get(i).equals(stateToCheck)) {
-               return states.get(i);
-           }
+            if (states.get(i).getName().equals(stateToCheck)) {
+                return states.get(i);
+            }
         }
         return null;
     }

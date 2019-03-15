@@ -26,6 +26,13 @@ public class State {
         return counties;
     }
 
+    public void printCounties() {
+        for (int i = 0; i < counties.size(); i++) {
+            System.out.println(counties.get(i).getName());
+
+        }
+    }
+
     public void setCounties(List<County> counties) {
         this.counties = counties;
     }

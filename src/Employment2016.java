@@ -4,7 +4,10 @@ public class Employment2016 {
     private int unemployedLaborForce;
     private double unemployedPercent;
 
-    public Employment2016() {
+    public Employment2016() { }
+
+    public void resultToString() {
+        System.out.println(totalLaborForce + ", " + employedLaborForce + ", " + unemployedLaborForce + ", " + unemployedPercent);
     }
 
     public int getTotalLaborForce() {

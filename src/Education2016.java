@@ -4,8 +4,10 @@ public class Education2016 {
     private double someCollege;
     private double bachelorsOrMore;
 
-    public Education2016() {
+    public Education2016() { }
 
+    public void resultToString() {
+        System.out.println(noHighSchool + ", " + onlyHighSchool + ", " + someCollege + ", " + bachelorsOrMore);
     }
 
     public double getNoHighSchool() {

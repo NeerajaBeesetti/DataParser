@@ -34,19 +34,22 @@ public class Main {
 
     private static void loadAllData(String electionFile, String educationFile, String unemploymentFile, DataManager dataManager) {
         String[] electionRawCleanedLines = Utils.readFileAsCleanedLines(electionFile, 1);
-//        String[] educationRawCleanedLines = Utils.readFileAsCleanedLines(educationFile, 5);
+        String[] educationRawCleanedLines = Utils.readFileAsCleanedLines(educationFile, 6);
         String[] unemploymentRawCleanedLines = Utils.readFileAsCleanedLines(unemploymentFile, 8);
+
 
         List<State> states = dataManager.getStates();
         Utils.addStateObjs(electionRawCleanedLines, states);
         Utils.addCountyObjs(electionRawCleanedLines, states);
 
-//        ArrayList<ElectionResult> electionResults = Utils.parse2016ElectionResults(electionRawCleanedLines, dataManager);
-//        ArrayList<Education2016> educationResults = Utils.parse2016Education(educationRawCleanedLines, dataManager);
+        ArrayList<ElectionResult> electionResults = Utils.parse2016ElectionResults(electionRawCleanedLines, dataManager);
+        ArrayList<Education2016> educationResults = Utils.parse2016Education(educationRawCleanedLines, dataManager);
         ArrayList<Employment2016> employmentResults = Utils.parse2016Unemployment(unemploymentRawCleanedLines, dataManager);
 
-        System.out.println(employmentResults);
+        //System.out.println(employmentResults);
 
+
+        //dataManager.getStates().get(4).getCounties().get(0).getEmploy2016().resultToString();
 
         //adding education and employment data done inside parsing methods
 

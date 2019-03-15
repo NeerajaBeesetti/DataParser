@@ -26,16 +26,16 @@ public class Utils {
         for (String line : lines) {
             String[] items = line.split(",");
 
-            double votesDem = Double.parseDouble(items[1]);
-            double votesGop = Double.parseDouble(items[2]);
-            double totalVotes = Double.parseDouble(items[3]);
-            double perDem = Double.parseDouble(items[4]);
-            double perGop = Double.parseDouble(items[5]);
-            int diff = Integer.parseInt(items[6]);
-            double perPointDiff = Double.parseDouble(items[7]);
+            double votesDem = Double.parseDouble(items[1].trim());
+            double votesGop = Double.parseDouble(items[2].trim());
+            double totalVotes = Double.parseDouble(items[3].trim());
+            double perDem = Double.parseDouble(items[4].trim());
+            double perGop = Double.parseDouble(items[5].trim());
+            int diff = Integer.parseInt(items[6].trim());
+            double perPointDiff = Double.parseDouble(items[7].trim());
             String stateAbbr = items[8];
             String countyName = items[9];
-            int combinedFips = Integer.parseInt(items[10]);
+            int combinedFips = Integer.parseInt(items[10].trim());
 
             ElectionResult result = new ElectionResult(votesDem, votesGop, totalVotes, perDem, perGop, diff, perPointDiff, stateAbbr, countyName, combinedFips);
             //result.resultToString();
@@ -55,12 +55,13 @@ public class Utils {
     public static ArrayList<Education2016> parse2016Education(String[] lines, DataManager dataManager) {
         ArrayList<Education2016> results = new ArrayList<>();
 
-        for (String line : lines) {
+        for (int i = 6; i < lines.length - 10; i++) {
+            String line = lines[i];
             String[] items = line.split(",");
-            double noHighSchool = Double.parseDouble(items[43]);
-            double onlyHighSchool = Double.parseDouble(items[44]);
-            double someCollege = Double.parseDouble(items[45]);
-            double bachelorsOrMore = Double.parseDouble(items[46]);
+            double noHighSchool = Double.parseDouble(items[43].trim());
+            double onlyHighSchool = Double.parseDouble(items[44].trim());
+            double someCollege = Double.parseDouble(items[45].trim());
+            double bachelorsOrMore = Double.parseDouble(items[46].trim());
 
             Education2016 result = new Education2016();
             result.setNoHighSchool(noHighSchool);
@@ -69,14 +70,21 @@ public class Utils {
             result.setBachelorsOrMore(bachelorsOrMore);
             results.add(result);
 
-            String stateAbbr = items[1];
-            State state = dataManager.getAlreadyExistingState(stateAbbr);
+            int fipsNum = Integer.parseInt(items[0]);
+            if (fipsNum % 1000 != 0) {
+                String stateAbbr = items[1];
+                State state = dataManager.getAlreadyExistingState(stateAbbr);
 
-            if (state != null) {
-                County c = state.getCounty(items[2], Integer.parseInt(items[0]));
-                c.setEduc2016(result);
+                if (state != null) {
+                    County c = state.getCounty(items[2], Integer.parseInt(items[0]));
+                    if (c != null) {
+                        c.setEduc2016(result);
+                    }
+                }
             }
+
         }
+
         return results;
     }
 
@@ -86,14 +94,10 @@ public class Utils {
         for (String line : lines) {
             String[] items = line.split(",");
 
-            int totalLaborForce = Integer.parseInt(items[42]);
-            int employedLaborForce = Integer.parseInt(items[43]);
-            int unemployedLaborForce = Integer.parseInt(items[44]);
-            double unemployedPercent = Double.parseDouble(items[45]);
-
-            //TODO: fix error
-            //number format exception error
-            //input string: "     702 "
+            int totalLaborForce = Integer.parseInt(items[42].trim());
+            int employedLaborForce = Integer.parseInt(items[43].trim());
+            int unemployedLaborForce = Integer.parseInt(items[44].trim());
+            double unemployedPercent = Double.parseDouble(items[45].trim());
 
             Employment2016 result = new Employment2016();
             result.setTotalLaborForce(totalLaborForce);
@@ -102,13 +106,19 @@ public class Utils {
             result.setUnemployedPercent(unemployedPercent);
             results.add(result);
 
-            String stateAbbr = items[1];
-            State state = dataManager.getAlreadyExistingState(stateAbbr);
+            int fipsNum = Integer.parseInt(items[0]);
+            if (fipsNum % 1000 != 0) {
+                String stateAbbr = items[1];
+                State state = dataManager.getAlreadyExistingState(stateAbbr);
 
-            if (state != null) {
-                County c = state.getCounty(items[2], Integer.parseInt(items[0]));
-                c.setEmploy2016(result);
+                if (state != null) {
+                    County c = state.getCounty(items[2], Integer.parseInt(items[0]));
+                    if (c != null) {
+                        c.setEmploy2016(result);
+                    }
+                }
             }
+
         }
         return results;
     }
@@ -153,17 +163,6 @@ public class Utils {
         }
 
         return null;
-    }
-
-
-    public static boolean isInteger(String[] line, int index) {
-        int n = 0;
-        try {
-            n = Integer.parseInt(line[index]);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
     }
 
     private static String fixLine(String line) {
