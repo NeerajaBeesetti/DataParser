@@ -166,7 +166,7 @@ public class Utils {
     }
 
     private static String fixLine(String line) {
-        line = line.trim();
+        //line = line.trim();
 
         while (line.indexOf(",,") != -1) {
             line = line.replace(",,", ",0,");
@@ -208,4 +208,47 @@ public class Utils {
         return out;
 
     }
+
+
+//    public static String[] readFileAsClean(String file, int startLine) {
+//        String[] results = file.split("\n");
+//
+//        for (int i = startLine; i < results.length; i++) {
+//            results[i] = cleanLine(results[i]);
+//
+//
+//        }
+//
+//        return results;
+//    }
+//
+//    private static String cleanLine(String row) {
+//        int firstQuote = row.indexOf("\"");
+//        int secondQuote = row.indexOf("\"", firstQuote + 1);
+//
+//        while (firstQuote != -1 && secondQuote != -1) {
+//            row = cleanSubstring(row, firstQuote, secondQuote);
+//            firstQuote = row.indexOf("\"");
+//            secondQuote = row.indexOf("\"", firstQuote + 1);
+//        }
+//        row = row.replaceAll("%", "");
+//        return row;
+//    }
+//
+//    private static String cleanSubstring(String row, int firstQuote, int secondQuote) {
+//        String before = row.substring(0, firstQuote);
+//        String after = row.substring(secondQuote + 1);
+//
+//        String toClean = row.substring(firstQuote + 1, secondQuote);
+//
+//        return before + clean(toClean) + after;
+//    }
+//
+//    private static String clean(String toClean) {
+//        toClean = toClean.replaceAll(",", "").trim();
+//        toClean = toClean.replaceAll("%", "");
+//        return toClean;
+//    }
+
+
 }
