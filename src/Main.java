@@ -29,7 +29,7 @@ public class Main {
 
         dataManager.loadAllData("data/2016_Presidential_Results.csv", "data/Education.csv", "data/Unemployment.csv", dataManager);
 
-        dataManager.getStates().get(4).getCounties().get(0).getEmploy2016().resultToString();
+        dataManager.getStates().get(0).getCounties().get(0).getEduc2016().resultToString();
 
 
     }
