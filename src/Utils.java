@@ -20,7 +20,7 @@ public class Utils {
         return output.toString();
     }
 
-    public static ArrayList<ElectionResult> parse2016ElectionResults(String[] lines, DataManager dataManager) {
+    public static void parse2016ElectionResults(String[] lines, DataManager dataManager) {
         ArrayList<ElectionResult> results = new ArrayList<>();
 
         for (String line : lines) {
@@ -49,10 +49,10 @@ public class Utils {
             }
 
         }
-        return results;
+
     }
 
-    public static ArrayList<Education2016> parse2016Education(String[] lines, DataManager dataManager) {
+    public static void parse2016Education(String[] lines, DataManager dataManager) {
         ArrayList<Education2016> results = new ArrayList<>();
 
         for (int i = 6; i < lines.length - 10; i++) {
@@ -85,10 +85,10 @@ public class Utils {
 
         }
 
-        return results;
+
     }
 
-    public static ArrayList<Employment2016> parse2016Unemployment(String[] lines, DataManager dataManager) {
+    public static void parse2016Unemployment(String[] lines, DataManager dataManager) {
         ArrayList<Employment2016> results = new ArrayList<>();
 
         for (String line : lines) {
@@ -120,7 +120,7 @@ public class Utils {
             }
 
         }
-        return results;
+
     }
 
     public static void addStateObjs(String[] lines, List<State> states) {

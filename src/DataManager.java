@@ -8,7 +8,7 @@ public class DataManager {
         states = new ArrayList<>();
     }
 
-    public  void addStateObjs(String[] lines, List<State> states) {
+    public void addStateObjs(String[] lines, List<State> states) {
         for (String line : lines) {
 
             String[] items = line.split(",");
@@ -54,9 +54,9 @@ public class DataManager {
         addStateObjs(electionRawCleanedLines, states);
         addCountyObjs(electionRawCleanedLines, states);
 
-        ArrayList<ElectionResult> electionResults = Utils.parse2016ElectionResults(electionRawCleanedLines, dataManager);
-        ArrayList<Education2016> educationResults = Utils.parse2016Education(educationRawCleanedLines, dataManager);
-        ArrayList<Employment2016> employmentResults = Utils.parse2016Unemployment(unemploymentRawCleanedLines, dataManager);
+        Utils.parse2016ElectionResults(electionRawCleanedLines, dataManager);
+        Utils.parse2016Education(educationRawCleanedLines, dataManager);
+        Utils.parse2016Unemployment(unemploymentRawCleanedLines, dataManager);
 
 
         //System.out.println(employmentResults);
