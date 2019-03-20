@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,4 +99,23 @@ public class DataManager {
         return null;
     }
 
+    public void exportData() {
+        String newData = "";
+
+        for (int i = 0; i < states.size(); i++) {
+
+            newData += states.get(i).getName();
+
+        }
+    }
+
+    public void writeDataToFile(String s) {
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/newData.csv"))) {
+            writer.write(s);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
