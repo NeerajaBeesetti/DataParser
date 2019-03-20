@@ -44,10 +44,11 @@ public class DataManager {
         states.add(s);
     }
 
-    public void loadAllData(String electionFile, String educationFile, String unemploymentFile, DataManager dataManager) {
+    public void loadAllData(String electionFile, String educationFile, String unemploymentFile, String povertyFile, DataManager dataManager) {
         String[] electionRawCleanedLines = Utils.readFileAsCleanedLines(electionFile, 1);
         String[] educationRawCleanedLines = Utils.readFileAsCleanedLines(educationFile, 6);
         String[] unemploymentRawCleanedLines = Utils.readFileAsCleanedLines(unemploymentFile, 8);
+        String[] povertyRawCleanedLines = Utils.readFileAsCleanedLines(povertyFile, 1);
 
 
         List<State> states = dataManager.getStates();
