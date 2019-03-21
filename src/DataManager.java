@@ -7,6 +7,9 @@ import java.util.List;
 public class DataManager {
     private List<State> states;
 
+    // private FileWriter fileWriter = new FileWriter("data/newData.csv");
+    // private BufferedWriter bufferedWriter = new BufferedWriter();
+
     public DataManager() {
         states = new ArrayList<>();
     }
@@ -104,16 +107,24 @@ public class DataManager {
 
         for (int i = 0; i < states.size(); i++) {
 
-            newData += states.get(i).getName();
+
+            for (int j = 0; j < states.get(i).getCounties().size(); j++) {
+
+                newData += states.get(i).getName() + "," + states.get(i).getCounties().get(j).getName() + "\n";
+
+
+            }
 
         }
+        writeDataToFile(newData);
     }
 
-    public void writeDataToFile(String s) {
+    private void writeDataToFile(String s) {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/newData.csv"))) {
             writer.write(s);
             writer.newLine();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
