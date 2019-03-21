@@ -110,7 +110,8 @@ public class DataManager {
 
             for (int j = 0; j < states.get(i).getCounties().size(); j++) {
 
-                newData += states.get(i).getName() + "," + states.get(i).getCounties().get(j).getName() + "\n";
+                newData += states.get(i).getName() + "," + states.get(i).getCounties().get(j).getName() + ","
+                        + states.get(i).getCounties().get(j).getEmploy2016().toString() + "\n";
 
 
             }
