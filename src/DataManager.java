@@ -57,7 +57,7 @@ public class DataManager {
         String[] povertyRawCleanedLines = Utils.readFileAsCleanedLines(povertyFile, 1);
 
 
-        List<State> states = dataManager.getStates();
+        // List<State> states = dataManager.getStates();
         addStateObjs(electionRawCleanedLines, states);
         addCountyObjs(electionRawCleanedLines, states);
 
@@ -103,16 +103,17 @@ public class DataManager {
     }
 
     public void exportData() {
-        String newData = "";
+        String newData = "State,County Name,FIPS" + "\n";
 
         for (int i = 0; i < states.size(); i++) {
 
-
+            State currentState = states.get(i);
             for (int j = 0; j < states.get(i).getCounties().size(); j++) {
+                County currentCounty = currentState.getCounties().get(j);
 
-                newData += states.get(i).getName() + "," + states.get(i).getCounties().get(j).getName() + ","
-                        + states.get(i).getCounties().get(j).getEmploy2016().toString() + "\n";
-
+                // newData += currentState.getName() + "," + currentCounty.getName() + "," + currentCounty.getFips() + "\n";
+                newData += currentState.getName() + "," + currentCounty.getName() + "," + currentCounty.getFips() +
+                        "," + currentCounty.getEduc2016().getNoHighSchool() + "\n";
 
             }
 
@@ -124,7 +125,6 @@ public class DataManager {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/newData.csv"))) {
             writer.write(s);
-            writer.newLine();
 
         } catch (IOException e) {
             e.printStackTrace();
