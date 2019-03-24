@@ -21,11 +21,31 @@ public class Utils {
         return output.toString();
     }
 
+    public static void parse2016Poverty(String[] lines, DataManager dataManager) {
+        ArrayList<Poverty2016> results = new ArrayList<>();
+
+        for (String line : lines) {
+            String[] items = line.split(",");
+
+            if (Integer.parseInt(items[0]) == 2016) {
+                double numBelowPov = Double.parseDouble(items[3].trim());
+
+                Poverty2016 result = new Poverty2016();
+                result.setnumBelowPov(numBelowPov);
+
+                County c = dataManager.getAlreadyExistingCounty(items[1]);
+                if (c != null) {
+                    c.setPov2016(result);
+                }
+            }
+        }
+
+    }
 
     public static void parse2016Population(String[] lines, DataManager dataManager) {
         ArrayList<Population2016> results = new ArrayList<>();
 
-        for (String line: lines) {
+        for (String line : lines) {
             String[] items = line.split(",");
 
             int popNum = Integer.parseInt(items[11].trim());
@@ -216,7 +236,6 @@ public class Utils {
         }
 
 
-
         while (line.indexOf("%") != -1) {
             int signIndex = line.indexOf("%");
             line = line.substring(0, signIndex) + line.substring(signIndex + 1, line.length());
@@ -251,8 +270,5 @@ public class Utils {
             out[i - linesToSkip] = fixLine(lines[i]);
         }
         return out;
-
     }
-
-
 }

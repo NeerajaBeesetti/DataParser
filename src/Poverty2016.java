@@ -1,18 +1,18 @@
 public class Poverty2016 {
 
-    private double incomeBelowPov;
+    private double numBelowPov;
 
-    public Poverty2016() {
+    public Poverty2016() { }
 
+    public double getnumBelowPov() {
+        return numBelowPov;
     }
 
-    public double getIncomeBelowPov() {
-        return incomeBelowPov;
+    public void setnumBelowPov(double numBelowPov) {
+        this.numBelowPov = numBelowPov;
     }
 
-    public void setIncomeBelowPov(double incomeBelowPov) {
-        this.incomeBelowPov = incomeBelowPov;
+    public void resultToString() {
+        System.out.println("Number of People below Poverty Line: " + numBelowPov);
     }
-
-
 }

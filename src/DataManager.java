@@ -6,12 +6,14 @@ import java.util.List;
 
 public class DataManager {
     private List<State> states;
+    private List<County> counties;
 
     // private FileWriter fileWriter = new FileWriter("data/newData.csv");
     // private BufferedWriter bufferedWriter = new BufferedWriter();
 
     public DataManager() {
         states = new ArrayList<>();
+        counties = new ArrayList<>();
     }
 
     public void addStateObjs(String[] lines, List<State> states) {
@@ -29,18 +31,31 @@ public class DataManager {
         }
     }
 
-    public List<State> getStates() {
-        return states;
-    }
+    public List<State> getStates() { return states; }
 
     public void setStates(List<State> states) {
         this.states = states;
     }
 
+    public List<County> getCounties() { return counties; }
+
+    public void setCounties(List<County> counties) {
+        this.counties = counties;
+    }
+
+    public County getAlreadyExistingCounty(String countyToCheck) {
+        for (County temp: counties) {
+             if (temp.getName().equals(countyToCheck)) {
+                 return temp;
+             }
+        }
+        return null;
+    }
+
     public State getAlreadyExistingState(String stateToCheck) {
-        for (int i = 0; i < states.size(); i++) {
-            if (states.get(i).getName().equals(stateToCheck)) {
-                return states.get(i);
+        for (State temp: states) {
+            if (temp.getName().equals(stateToCheck)) {
+                return temp;
             }
         }
         return null;
@@ -75,10 +90,13 @@ public class DataManager {
         Utils.parse2016Education(educationRawCleanedLines, dataManager);
         Utils.parse2016Unemployment(unemploymentRawCleanedLines, dataManager);
         Utils.parse2016Population(populationRawCleanedLines, dataManager);
+        Utils.parse2016Poverty(povertyRawCleanedLines, dataManager);
+
         //System.out.println(employmentResults);
 
 
-         dataManager.getStates().get(4).getCounties().get(0).getPop2016().resultToString();
+        dataManager.getStates().get(4).getCounties().get(0).getPop2016().resultToString();
+        dataManager.getStates().get(4).getCounties().get(0).getPov2016().resultToString();
         //System.out.println(dataManager.getStates().get(4).getCounties().get(0).getName());
 
 
@@ -98,9 +116,10 @@ public class DataManager {
 
             String countyName = items[9];
             int fips = Integer.parseInt(items[10]);
-            state.addCounty(new County(countyName, fips));
+            County toAdd = new County(countyName, fips);
+            state.addCounty(toAdd);
             state.setFirstNumInFIPS(Integer.parseInt((items[10].substring(0, 1))));
-
+            counties.add(toAdd);
         }
     }
 
