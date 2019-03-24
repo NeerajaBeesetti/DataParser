@@ -5,6 +5,9 @@ public class State {
 
     private String name;
     private List<County> counties;
+    private int firstNumInFIPS;
+
+
 
     public State() {
         counties = new ArrayList<>();
@@ -45,6 +48,13 @@ public class State {
         return null;
     }
 
+    public int getFirstNumInFIPS() {
+        return firstNumInFIPS;
+    }
+
+    public void setFirstNumInFIPS(int firstNumInFIPS) {
+        this.firstNumInFIPS = firstNumInFIPS;
+    }
 
 }
 

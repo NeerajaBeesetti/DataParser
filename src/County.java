@@ -4,6 +4,8 @@ public class County {
     private ElectionResult vote2016;
     private Education2016 educ2016;
     private Employment2016 employ2016;
+    private Population2016 pop2016;
+    private Poverty2016 pov2016;
 
     public County(String name, int fips) {
         this.name = name;
@@ -49,4 +51,14 @@ public class County {
     public void setEmploy2016(Employment2016 employ2016) {
         this.employ2016 = employ2016;
     }
+
+    public Population2016 getPop2016() { return pop2016; }
+
+    public void setPop2016(Population2016 pop2016) {
+        this.pop2016 = pop2016;
+    }
+
+    public Poverty2016 getPov2016() { return pov2016; }
+
+    public void setPov2016(Poverty2016 pov2016) { this.pov2016 = pov2016; }
 }

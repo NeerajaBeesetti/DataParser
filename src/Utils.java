@@ -25,6 +25,28 @@ public class Utils {
     public static void parse2016Population(String[] lines, DataManager dataManager) {
         ArrayList<Population2016> results = new ArrayList<>();
 
+        for (String line: lines) {
+            String[] items = line.split(",");
+
+            int popNum = Integer.parseInt(items[11].trim());
+
+            Population2016 result = new Population2016();
+            result.setPopNum(popNum);
+
+            int fipsNum = Integer.parseInt(items[1]);
+            int fipsNumFirstNum = Integer.parseInt(items[1].substring(0, 1));
+
+            if (fipsNum % 1000 != 0) {
+                State state = dataManager.getAlreadyExistingState(fipsNumFirstNum);
+
+                if (state != null) {
+                    County c = state.getCounty(items[2], Integer.parseInt(items[1]));
+                    if (c != null) {
+                        c.setPop2016(result);
+                    }
+                }
+            }
+        }
 
     }
 
@@ -174,13 +196,6 @@ public class Utils {
     }
 
     private static String fixLine(String line) {
-
-        line = fixCountyName(line);
-
-        while (line.indexOf(",,") != -1) {
-            line = line.replace(",,", ",0,");
-        }
-
         while (line.indexOf("\"") != -1) {
             int quoteStartIndex = line.indexOf("\"");
             int quoteEndIndex = line.indexOf("\"", quoteStartIndex + 1);
@@ -193,6 +208,14 @@ public class Utils {
             line = line.replace(wordWQuotes, fixedWord);
 
         }
+
+        line = fixCountyName(line);
+
+        while (line.indexOf(",,") != -1) {
+            line = line.replace(",,", ",0,");
+        }
+
+
 
         while (line.indexOf("%") != -1) {
             int signIndex = line.indexOf("%");
@@ -212,8 +235,8 @@ public class Utils {
         int indexOfCounty = line.indexOf("County");
         if (indexOfCounty != -1) {
             indexOfCounty = indexOfCounty + 6;
-            if (!(line.substring(indexOfCounty, indexOfCounty + 1).equals("\""))) {
-                int indexOfRest = line.indexOf("\"", indexOfCounty);
+            if (!(line.substring(indexOfCounty, indexOfCounty + 1).equals(","))) {
+                int indexOfRest = line.indexOf(",", indexOfCounty);
                 return line.substring(0, indexOfCounty) + line.substring(indexOfRest, line.length());
             }
         }

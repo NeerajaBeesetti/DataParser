@@ -46,6 +46,15 @@ public class DataManager {
         return null;
     }
 
+    public State getAlreadyExistingState(int fipsNumFirstNum) {
+        for (int i = 0; i < states.size(); i++) {
+            if (states.get(i).getFirstNumInFIPS() == fipsNumFirstNum) {
+                return states.get(i);
+            }
+        }
+        return null;
+    }
+
     public void add(State s) {
         states.add(s);
     }
@@ -65,14 +74,13 @@ public class DataManager {
         Utils.parse2016ElectionResults(electionRawCleanedLines, dataManager);
         Utils.parse2016Education(educationRawCleanedLines, dataManager);
         Utils.parse2016Unemployment(unemploymentRawCleanedLines, dataManager);
-
-
+        Utils.parse2016Population(populationRawCleanedLines, dataManager);
         //System.out.println(employmentResults);
 
 
-        // dataManager.getStates().get(4).getCounties().get(0).getEmploy2016().resultToString();
+         dataManager.getStates().get(4).getCounties().get(0).getPop2016().resultToString();
+        //System.out.println(dataManager.getStates().get(4).getCounties().get(0).getName());
 
-        //adding education and employment data done inside parsing methods
 
     }
 
@@ -91,6 +99,7 @@ public class DataManager {
             String countyName = items[9];
             int fips = Integer.parseInt(items[10]);
             state.addCounty(new County(countyName, fips));
+            state.setFirstNumInFIPS(Integer.parseInt((items[10].substring(0, 1))));
 
         }
     }
