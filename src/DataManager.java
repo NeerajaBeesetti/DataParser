@@ -136,7 +136,7 @@ public class DataManager {
     }
 
     public void exportData() {
-        String newData = "State,County Name,FIPS" + "\n";
+        String newData = "State,County Name,FIPS,Bachleors or more,No High School" + "\n";
 
         for (int i = 0; i < states.size(); i++) {
 
@@ -146,9 +146,10 @@ public class DataManager {
                 County currentCounty = currentState.getCounties().get(j);
 
                 // newData += currentState.getName() + "," + currentCounty.getName() + "," + currentCounty.getFips() + "\n";
-                if (currentCounty.getEduc2016() != null)
-                    newData += currentState.getName() + "," + currentCounty.getName() + "," + currentCounty.getFips() + "," + currentCounty.getEduc2016().getBachelorsOrMore() + "\n";
-
+                if (currentCounty.getEduc2016() != null) {
+                    newData += currentState.getName() + "," + currentCounty.getName() + "," +
+                            currentCounty.getFips() + "," + currentCounty.getEduc2016().getBachelorsOrMore() + "," +currentCounty.getEduc2016().getNoHighSchool() + "\n";
+                }
             }
 
         }
