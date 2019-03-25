@@ -8,7 +8,6 @@ public class State {
     private int firstNumInFIPS;
 
 
-
     public State() {
         counties = new ArrayList<>();
     }
@@ -29,6 +28,10 @@ public class State {
         return counties;
     }
 
+    public void setCounties(List<County> counties) {
+        this.counties = counties;
+    }
+
     public void printCounties() {
         for (int i = 0; i < counties.size(); i++) {
             System.out.println(counties.get(i).getName());
@@ -36,14 +39,9 @@ public class State {
         }
     }
 
-    public void setCounties(List<County> counties) {
-        this.counties = counties;
-    }
-
-
     public County getCounty(String countyName, int combinedFips) {
         for (County c : counties) {
-            if (c.getName().equals(countyName) || c.getFips() == combinedFips) return c;
+            if (c.getFips() == combinedFips || c.getName().equals(countyName)) return c;
         }
         return null;
     }

@@ -31,29 +31,33 @@ public class DataManager {
         }
     }
 
-    public List<State> getStates() { return states; }
+    public List<State> getStates() {
+        return states;
+    }
 
     public void setStates(List<State> states) {
         this.states = states;
     }
 
-    public List<County> getCounties() { return counties; }
+    public List<County> getCounties() {
+        return counties;
+    }
 
     public void setCounties(List<County> counties) {
         this.counties = counties;
     }
 
     public County getAlreadyExistingCounty(String countyToCheck) {
-        for (County temp: counties) {
-             if (temp.getName().equals(countyToCheck)) {
-                 return temp;
-             }
+        for (County temp : counties) {
+            if (temp.getName().equals(countyToCheck)) {
+                return temp;
+            }
         }
         return null;
     }
 
     public State getAlreadyExistingState(String stateToCheck) {
-        for (State temp: states) {
+        for (State temp : states) {
             if (temp.getName().equals(stateToCheck)) {
                 return temp;
             }
@@ -137,12 +141,13 @@ public class DataManager {
         for (int i = 0; i < states.size(); i++) {
 
             State currentState = states.get(i);
+
             for (int j = 0; j < states.get(i).getCounties().size(); j++) {
                 County currentCounty = currentState.getCounties().get(j);
 
                 // newData += currentState.getName() + "," + currentCounty.getName() + "," + currentCounty.getFips() + "\n";
-                newData += currentState.getName() + "," + currentCounty.getName() + "," + currentCounty.getFips() +
-                        "," + currentCounty.getEduc2016().getNoHighSchool() + "\n";
+                if (currentCounty.getEduc2016() != null)
+                    newData += currentState.getName() + "," + currentCounty.getName() + "," + currentCounty.getFips() + "," + currentCounty.getEduc2016().getBachelorsOrMore() + "\n";
 
             }
 

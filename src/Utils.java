@@ -22,7 +22,7 @@ public class Utils {
     }
 
     public static void parse2016Poverty(String[] lines, DataManager dataManager) {
-        ArrayList<Poverty2016> results = new ArrayList<>();
+
 
         for (String line : lines) {
             String[] items = line.split(",");
@@ -43,7 +43,7 @@ public class Utils {
     }
 
     public static void parse2016Population(String[] lines, DataManager dataManager) {
-        ArrayList<Population2016> results = new ArrayList<>();
+
 
         for (String line : lines) {
             String[] items = line.split(",");
