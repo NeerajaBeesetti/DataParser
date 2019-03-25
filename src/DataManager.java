@@ -1,6 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -146,17 +147,25 @@ public class DataManager {
                 County currentCounty = currentState.getCounties().get(j);
                 Education2016 education2016 = currentCounty.getEduc2016();
                 ElectionResult electionResult = currentCounty.getVote2016();
+                Poverty2016 pov2016 = currentCounty.getPov2016();
+                Population2016 population2016 = currentCounty.getPop2016();
 
-                if (education2016 != null) {
+                if (population2016 != null && pov2016 != null && education2016 != null) {
+                    double population = (pov2016.getnumBelowPov() / (double) population2016.getPopNum());
+                    population = population * 100;
+                    population = Math.round(population * 100.0) / 100.0;
+
                     newData += currentState.getName() + "," + currentCounty.getName() + "," + currentCounty.getFips() + "," +
                             electionResult.getVotesDem() + "," + electionResult.getVotesGop() + "," + education2016.getNoHighSchool() + "," +
-                            education2016.getOnlyHighSchool() + "," + education2016.getSomeCollege() + "," + education2016.getBachelorsOrMore();
+                            education2016.getOnlyHighSchool() + "," + education2016.getSomeCollege() + "," + education2016.getBachelorsOrMore() + "," + population + "\n";
                 }
-
             }
 
+
         }
+
         writeDataToFile(newData);
+
     }
 
     private void writeDataToFile(String s) {
