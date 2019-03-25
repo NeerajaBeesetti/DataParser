@@ -145,10 +145,14 @@ public class DataManager {
             for (int j = 0; j < states.get(i).getCounties().size(); j++) {
                 County currentCounty = currentState.getCounties().get(j);
                 Education2016 education2016 = currentCounty.getEduc2016();
+                ElectionResult electionResult = currentCounty.getVote2016();
+
                 if (education2016 != null) {
-                    newData += currentState.getName() + "," + currentCounty.getName() + "," +
-                            currentCounty.getFips() + "," + education2016.getBachelorsOrMore() + "," + education2016.getNoHighSchool() + "," + education2016.getOnlyHighSchool() + "\n";
+                    newData += currentState.getName() + "," + currentCounty.getName() + "," + currentCounty.getFips() + "," +
+                            electionResult.getVotesDem() + "," + electionResult.getVotesGop() + "," + education2016.getNoHighSchool() + "," +
+                            education2016.getOnlyHighSchool() + "," + education2016.getSomeCollege() + "," + education2016.getBachelorsOrMore();
                 }
+
             }
 
         }
