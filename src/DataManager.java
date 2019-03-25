@@ -144,6 +144,7 @@ public class DataManager {
             State currentState = states.get(i);
 
             for (int j = 0; j < states.get(i).getCounties().size(); j++) {
+
                 County currentCounty = currentState.getCounties().get(j);
                 Education2016 education2016 = currentCounty.getEduc2016();
                 ElectionResult electionResult = currentCounty.getVote2016();
@@ -159,6 +160,7 @@ public class DataManager {
                             electionResult.getVotesDem() + "," + electionResult.getVotesGop() + "," + education2016.getNoHighSchool() + "," +
                             education2016.getOnlyHighSchool() + "," + education2016.getSomeCollege() + "," + education2016.getBachelorsOrMore() + "," + population + "\n";
                 }
+
             }
 
 
