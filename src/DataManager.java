@@ -136,7 +136,7 @@ public class DataManager {
     }
 
     public void exportData() {
-        String newData = "State,County Name,FIPS,Bachleors or more,No High School" + "\n";
+        String newData = "State,County Name,FIPS,Bachelor's or more,No High School" + "\n";
 
         for (int i = 0; i < states.size(); i++) {
 
