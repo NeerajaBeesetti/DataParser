@@ -1,4 +1,3 @@
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,13 +16,10 @@ public class Utils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return output.toString();
     }
 
     public static void parse2016Poverty(String[] lines, DataManager dataManager) {
-
-
         for (String line : lines) {
             String[] items = line.split(",");
 
@@ -39,12 +35,9 @@ public class Utils {
                 }
             }
         }
-
     }
 
     public static void parse2016Population(String[] lines, DataManager dataManager) {
-
-
         for (String line : lines) {
             String[] items = line.split(",");
 
@@ -53,9 +46,6 @@ public class Utils {
             Population2016 result = new Population2016();
             result.setPopNum(popNum);
 
-            //int fipsNum = Integer.parseInt(items[1]);
-            //int fipsNumFirstNum = Integer.parseInt(items[1].substring(0, 1));
-
             String stateAbbr = items[3].trim();
             State state = dataManager.getAlreadyExistingState(stateAbbr);
 
@@ -63,9 +53,7 @@ public class Utils {
                 County c = state.getCounty(items[2], Integer.parseInt(items[1]));
                 c.setPop2016(result);
             }
-
         }
-
     }
 
     public static void parse2016ElectionResults(String[] lines, DataManager dataManager) {
@@ -86,7 +74,6 @@ public class Utils {
             int combinedFips = Integer.parseInt(items[10].trim());
 
             ElectionResult result = new ElectionResult(votesDem, votesGop, totalVotes, perDem, perGop, diff, perPointDiff, stateAbbr, countyName, combinedFips);
-            //result.resultToString();
             results.add(result);
 
             State state = dataManager.getAlreadyExistingState(stateAbbr);
@@ -97,9 +84,7 @@ public class Utils {
                     c.setVote2016(result);
                 }
             }
-
         }
-
     }
 
     public static void parse2016Education(String[] lines, DataManager dataManager) {
@@ -132,10 +117,7 @@ public class Utils {
                     }
                 }
             }
-
         }
-
-
     }
 
     public static void parse2016Unemployment(String[] lines, DataManager dataManager) {
@@ -168,18 +150,15 @@ public class Utils {
                     }
                 }
             }
-
         }
-
     }
 
     public static void addStateObjs(String[] lines, List<State> states) {
         for (String line : lines) {
-
             String[] items = line.split(",");
             String stateAbbr = items[8];
-
             State state = getState(stateAbbr, states);
+
             if (state == null) {
                 State toAdd = new State();
                 toAdd.setName(stateAbbr);
@@ -190,7 +169,6 @@ public class Utils {
 
     public static void addCountyObjs(String[] lines, List<State> states) {
         for (String line : lines) {
-
             String[] items = line.split(",");
             String stateAbbr = items[8];
 
@@ -203,7 +181,6 @@ public class Utils {
             String countyName = items[9];
             int fips = Integer.parseInt(items[10]);
             state.addCounty(new County(countyName, fips));
-
         }
     }
 
@@ -211,12 +188,10 @@ public class Utils {
         for (State temp : states) {
             if (temp.getName().equals(name)) return temp;
         }
-
         return null;
     }
 
     private static String fixLine(String line) {
-
         while (line.indexOf("\"") != -1) {
             int quoteStartIndex = line.indexOf("\"");
             int quoteEndIndex = line.indexOf("\"", quoteStartIndex + 1);
@@ -229,30 +204,25 @@ public class Utils {
             line = line.replace(wordWQuotes, fixedWord);
 
         }
-
         //line = fixCountyName(line);
 
         while (line.indexOf(",,") != -1) {
             line = line.replace(",,", ",0,");
         }
 
-
         while (line.indexOf("%") != -1) {
             int signIndex = line.indexOf("%");
             line = line.substring(0, signIndex) + line.substring(signIndex + 1, line.length());
-
         }
 
         while (line.indexOf("$") != -1) {
             int signIndex = line.indexOf("$");
             line = line.substring(0, signIndex) + line.substring(signIndex + 1, line.length());
-
         }
         return line;
     }
 
     public static String fixCountyName(String line) {
-
         int indexOfCounty = line.indexOf("County");
         if (indexOfCounty != -1) {
             indexOfCounty = indexOfCounty + 6;
@@ -261,7 +231,6 @@ public class Utils {
                 return line.substring(0, indexOfCounty) + line.substring(indexOfRest);
             }
         }
-
         return line;
     }
 
@@ -273,8 +242,4 @@ public class Utils {
         }
         return out;
     }
-
-
-
-
 }
