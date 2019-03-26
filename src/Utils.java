@@ -30,6 +30,7 @@ public class Utils {
                 result.setnumBelowPov(numBelowPov);
 
                 County c = dataManager.getAlreadyExistingCounty(items[1]);
+
                 if (c != null) {
                     c.setPov2016(result);
                 }
