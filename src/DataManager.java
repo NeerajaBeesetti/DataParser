@@ -10,8 +10,6 @@ public class DataManager {
     private List<State> states;
     private List<County> counties;
 
-    // private FileWriter fileWriter = new FileWriter("data/newData.csv");
-    // private BufferedWriter bufferedWriter = new BufferedWriter();
 
     public DataManager() {
         states = new ArrayList<>();
@@ -59,6 +57,7 @@ public class DataManager {
     }
 
     public State getAlreadyExistingState(String stateToCheck) {
+        stateToCheck.trim();
         for (State temp : states) {
             if (temp.getName().equals(stateToCheck)) {
                 return temp;
@@ -86,8 +85,8 @@ public class DataManager {
         String[] educationRawCleanedLines = Utils.readFileAsCleanedLines(educationFile, 6, 10);
         String[] unemploymentRawCleanedLines = Utils.readFileAsCleanedLines(unemploymentFile, 8, 0);
         String[] povertyRawCleanedLines = Utils.readFileAsCleanedLines(povertyFile, 1, 0);
-        String[] populationRawCleanedLines = Utils.readFileAsCleanedLines(populationFile,2,0);
-        System.out.println(Arrays.toString(populationRawCleanedLines));
+        String[] populationRawCleanedLines = Utils.readFileAsCleanedLines(populationFile, 2, 0);
+        //System.out.println(Arrays.toString(populationRawCleanedLines));
 
 
         addStateObjs(electionRawCleanedLines, states);
@@ -100,11 +99,8 @@ public class DataManager {
         Utils.parse2016Poverty(povertyRawCleanedLines, dataManager);
 
 
-
-
-        dataManager.getStates().get(4).getCounties().get(0).getPop2016().resultToString();
-        dataManager.getStates().get(4).getCounties().get(0).getPov2016().resultToString();
-
+        //dataManager.getStates().get(4).getCounties().get(0).getPop2016().resultToString();
+        //dataManager.getStates().get(4).getCounties().get(0).getPov2016().resultToString();
 
 
     }
@@ -153,7 +149,8 @@ public class DataManager {
                 Poverty2016 pov2016 = currentCounty.getPov2016();
                 Population2016 population2016 = currentCounty.getPop2016();
 
-                if (education2016 != null) {
+                if (population2016 != null) {
+
                     double population = (pov2016.getnumBelowPov() / (double) population2016.getPopNum());
                     population = population * 100;
                     population = Math.round(population * 100.0) / 100.0;

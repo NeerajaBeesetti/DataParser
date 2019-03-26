@@ -47,11 +47,16 @@ public class Utils {
             result.setPopNum(popNum);
 
             String stateAbbr = items[3].trim();
+
             State state = dataManager.getAlreadyExistingState(stateAbbr);
 
+            if (state == null) System.out.println("State is null");
             if (state != null) {
                 County c = state.getCounty(items[2], Integer.parseInt(items[1]));
-                c.setPop2016(result);
+
+                if (c != null) {
+                    c.setPop2016(result);
+                }
             }
         }
     }
