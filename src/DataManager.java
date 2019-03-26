@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DataManager {
@@ -80,12 +81,13 @@ public class DataManager {
     }
 
     public void loadAllData(String electionFile, String educationFile, String unemploymentFile, String povertyFile, String populationFile, DataManager dataManager) {
+
         String[] electionRawCleanedLines = Utils.readFileAsCleanedLines(electionFile, 1, 0);
         String[] educationRawCleanedLines = Utils.readFileAsCleanedLines(educationFile, 6, 10);
         String[] unemploymentRawCleanedLines = Utils.readFileAsCleanedLines(unemploymentFile, 8, 0);
         String[] povertyRawCleanedLines = Utils.readFileAsCleanedLines(povertyFile, 1, 0);
-        String[] populationRawCleanedLines = Utils.readFileAsCleanedLines(populationFile, 2, 0);
-
+        String[] populationRawCleanedLines = Utils.readFileAsCleanedLines(populationFile,2,0);
+        System.out.println(Arrays.toString(populationRawCleanedLines));
 
         // List<State> states = dataManager.getStates();
         addStateObjs(electionRawCleanedLines, states);
@@ -151,7 +153,7 @@ public class DataManager {
                 Poverty2016 pov2016 = currentCounty.getPov2016();
                 Population2016 population2016 = currentCounty.getPop2016();
 
-                if (population2016 != null && pov2016 != null && education2016 != null) {
+                if (education2016 != null) {
                     double population = (pov2016.getnumBelowPov() / (double) population2016.getPopNum());
                     population = population * 100;
                     population = Math.round(population * 100.0) / 100.0;

@@ -216,6 +216,7 @@ public class Utils {
     }
 
     private static String fixLine(String line) {
+
         while (line.indexOf("\"") != -1) {
             int quoteStartIndex = line.indexOf("\"");
             int quoteEndIndex = line.indexOf("\"", quoteStartIndex + 1);
@@ -229,7 +230,7 @@ public class Utils {
 
         }
 
-        line = fixCountyName(line);
+        //line = fixCountyName(line);
 
         while (line.indexOf(",,") != -1) {
             line = line.replace(",,", ",0,");
@@ -251,12 +252,13 @@ public class Utils {
     }
 
     public static String fixCountyName(String line) {
+
         int indexOfCounty = line.indexOf("County");
         if (indexOfCounty != -1) {
             indexOfCounty = indexOfCounty + 6;
             if (!(line.substring(indexOfCounty, indexOfCounty + 1).equals(","))) {
                 int indexOfRest = line.indexOf(",", indexOfCounty);
-                return line.substring(0, indexOfCounty) + line.substring(indexOfRest, line.length());
+                return line.substring(0, indexOfCounty) + line.substring(indexOfRest);
             }
         }
 
@@ -266,9 +268,13 @@ public class Utils {
     public static String[] readFileAsCleanedLines(String filepath, int linesToSkip, int linesToSkipAtEnd) {
         String[] lines = (readFileAsString(filepath)).split("\n");
         String[] out = new String[lines.length - (linesToSkip + linesToSkipAtEnd)];
-        for (int i = linesToSkip; i < lines.length - linesToSkipAtEnd; i++) {
+        for (int i = linesToSkip; i < (lines.length - linesToSkipAtEnd); i++) {
             out[i - linesToSkip] = fixLine(lines[i]);
         }
         return out;
     }
+
+
+
+
 }
