@@ -53,19 +53,17 @@ public class Utils {
             Population2016 result = new Population2016();
             result.setPopNum(popNum);
 
-            int fipsNum = Integer.parseInt(items[1]);
-            int fipsNumFirstNum = Integer.parseInt(items[1].substring(0, 1));
+            //int fipsNum = Integer.parseInt(items[1]);
+            //int fipsNumFirstNum = Integer.parseInt(items[1].substring(0, 1));
 
-            if (fipsNum % 1000 != 0) {
-                State state = dataManager.getAlreadyExistingState(fipsNumFirstNum);
+            String stateAbbr = items[3].trim();
+            State state = dataManager.getAlreadyExistingState(stateAbbr);
 
-                if (state != null) {
-                    County c = state.getCounty(items[2], Integer.parseInt(items[1]));
-                    if (c != null) {
-                        c.setPop2016(result);
-                    }
-                }
+            if (state != null) {
+                County c = state.getCounty(items[2], Integer.parseInt(items[1]));
+                c.setPop2016(result);
             }
+
         }
 
     }
@@ -95,7 +93,9 @@ public class Utils {
 
             if (state != null) {
                 County c = state.getCounty(countyName, combinedFips);
-                c.setVote2016(result);
+                if (c != null) {
+                    c.setVote2016(result);
+                }
             }
 
         }
