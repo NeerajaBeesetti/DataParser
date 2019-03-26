@@ -89,7 +89,7 @@ public class DataManager {
         String[] populationRawCleanedLines = Utils.readFileAsCleanedLines(populationFile,2,0);
         System.out.println(Arrays.toString(populationRawCleanedLines));
 
-        // List<State> states = dataManager.getStates();
+
         addStateObjs(electionRawCleanedLines, states);
         addCountyObjs(electionRawCleanedLines, states);
 
@@ -99,12 +99,12 @@ public class DataManager {
         Utils.parse2016Population(populationRawCleanedLines, dataManager);
         Utils.parse2016Poverty(povertyRawCleanedLines, dataManager);
 
-        //System.out.println(employmentResults);
+
 
 
         dataManager.getStates().get(4).getCounties().get(0).getPop2016().resultToString();
         dataManager.getStates().get(4).getCounties().get(0).getPov2016().resultToString();
-        //System.out.println(dataManager.getStates().get(4).getCounties().get(0).getName());
+
 
 
     }
