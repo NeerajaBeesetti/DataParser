@@ -56,7 +56,21 @@ public class DataManager {
         return null;
     }
 
+    public County searchByCountyName(String countyToCheck) {
+        //System.out.println(countyToCheck);
+        countyToCheck.trim();
+        for (State sTemp : states) {
+            for (County cTemp : sTemp.getCounties())
+            if (cTemp.getName().equals(countyToCheck)) {
+                return cTemp;
+            }
+        }
+        return null;
+
+    }
+
     public State getAlreadyExistingState(String stateToCheck) {
+        //System.out.println(stateToCheck);
         stateToCheck.trim();
         for (State temp : states) {
             if (temp.getName().equals(stateToCheck)) {
@@ -142,15 +156,14 @@ public class DataManager {
             State currentState = states.get(i);
 
             for (int j = 0; j < states.get(i).getCounties().size(); j++) {
-
                 County currentCounty = currentState.getCounties().get(j);
+
                 Education2016 education2016 = currentCounty.getEduc2016();
                 ElectionResult electionResult = currentCounty.getVote2016();
                 Poverty2016 pov2016 = currentCounty.getPov2016();
                 Population2016 population2016 = currentCounty.getPop2016();
 
-                if (population2016 != null) {
-
+                if (population2016 != null && pov2016 != null) {
                     double population = (pov2016.getnumBelowPov() / (double) population2016.getPopNum());
                     population = population * 100;
                     population = Math.round(population * 100.0) / 100.0;

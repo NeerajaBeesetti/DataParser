@@ -24,19 +24,19 @@ public class Utils {
             String[] items = line.split(",");
 
             if (Integer.parseInt(items[0]) == 2016) {
-                double numBelowPov = Double.parseDouble(items[4].trim());
+                double numBelowPov = Double.parseDouble(items[3].trim());
 
                 Poverty2016 result = new Poverty2016();
                 result.setnumBelowPov(numBelowPov);
 
+                //State state = dataManager.getAlreadyExistingState(items[2].trim());
 
-                State state = dataManager.getAlreadyExistingState(items[2].trim());
-                if (state != null) {
-                    County c = state.getCounty(items[1], 0);
-                    if (c != null) {
-                        c.setPov2016(result);
-                    }
+                County c = dataManager.searchByCountyName(items[1]);
+                if (c != null) {
+                    c.setPov2016(result);
+                    System.out.println(result.getnumBelowPov());
                 }
+
             }
         }
     }
@@ -213,6 +213,7 @@ public class Utils {
             line = line.replace(wordWQuotes, fixedWord);
 
         }
+
         //line = fixCountyName(line);
 
         while (line.indexOf(",,") != -1) {
