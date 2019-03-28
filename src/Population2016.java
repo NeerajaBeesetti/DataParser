@@ -12,7 +12,5 @@ public class Population2016 {
         this.popNum = popNum;
     }
 
-    public void resultToString() {
-        System.out.println("Population Estimate: " + popNum);
-    }
+
 }

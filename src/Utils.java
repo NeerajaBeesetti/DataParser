@@ -34,7 +34,7 @@ public class Utils {
                 County c = dataManager.searchByCountyName(items[1]);
                 if (c != null) {
                     c.setPov2016(result);
-                    System.out.println(result.getnumBelowPov());
+
                 }
 
             }
@@ -54,7 +54,7 @@ public class Utils {
 
             State state = dataManager.getAlreadyExistingState(stateAbbr);
 
-            if (state == null) System.out.println("State is null");
+
             if (state != null) {
                 County c = state.getCounty(items[2], Integer.parseInt(items[1]));
 
@@ -214,7 +214,7 @@ public class Utils {
 
         }
 
-        //line = fixCountyName(line);
+
 
         while (line.indexOf(",,") != -1) {
             line = line.replace(",,", ",0,");
@@ -232,17 +232,7 @@ public class Utils {
         return line;
     }
 
-    public static String fixCountyName(String line) {
-        int indexOfCounty = line.indexOf("County");
-        if (indexOfCounty != -1) {
-            indexOfCounty = indexOfCounty + 6;
-            if (!(line.substring(indexOfCounty, indexOfCounty + 1).equals(","))) {
-                int indexOfRest = line.indexOf(",", indexOfCounty);
-                return line.substring(0, indexOfCounty) + line.substring(indexOfRest);
-            }
-        }
-        return line;
-    }
+
 
     public static String[] readFileAsCleanedLines(String filepath, int linesToSkip, int linesToSkipAtEnd) {
         String[] lines = (readFileAsString(filepath)).split("\n");

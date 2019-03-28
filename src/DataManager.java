@@ -61,9 +61,9 @@ public class DataManager {
         countyToCheck.trim();
         for (State sTemp : states) {
             for (County cTemp : sTemp.getCounties())
-            if (cTemp.getName().equals(countyToCheck)) {
-                return cTemp;
-            }
+                if (cTemp.getName().equals(countyToCheck)) {
+                    return cTemp;
+                }
         }
         return null;
 
@@ -100,7 +100,6 @@ public class DataManager {
         String[] unemploymentRawCleanedLines = Utils.readFileAsCleanedLines(unemploymentFile, 8, 0);
         String[] povertyRawCleanedLines = Utils.readFileAsCleanedLines(povertyFile, 1, 0);
         String[] populationRawCleanedLines = Utils.readFileAsCleanedLines(populationFile, 2, 0);
-        //System.out.println(Arrays.toString(populationRawCleanedLines));
 
 
         addStateObjs(electionRawCleanedLines, states);
@@ -113,8 +112,6 @@ public class DataManager {
         Utils.parse2016Poverty(povertyRawCleanedLines, dataManager);
 
 
-        //dataManager.getStates().get(4).getCounties().get(0).getPop2016().resultToString();
-        //dataManager.getStates().get(4).getCounties().get(0).getPov2016().resultToString();
 
 
     }
@@ -165,8 +162,10 @@ public class DataManager {
 
                 if (population2016 != null && pov2016 != null) {
                     double population = (pov2016.getnumBelowPov() / (double) population2016.getPopNum());
-                    population = population * 100;
-                    population = Math.round(population * 100.0) / 100.0;
+                    population = (population * 100);
+
+
+
 
                     newData += currentState.getName() + "," + currentCounty.getName() + "," + currentCounty.getFips() + "," +
                             electionResult.getVotesDem() + "," + electionResult.getVotesGop() + "," + education2016.getNoHighSchool() + "," +
